@@ -7,6 +7,7 @@ from app.prompts.triage_prompt import (
     CLASSIFIER_SYSTEM_PROMPT,
     REPLY_SYSTEM_PROMPT,
 )
+from app.knowledge.loader import load_knowledge
 
 load_dotenv()
 
@@ -39,6 +40,7 @@ def generate_reply(
     risk: str,
     assigned_team: str
 ) -> ReplyResult:
+    knowledge = load_knowledge(category)
     completion = client.chat.completions.parse(
         model="gpt-4o-mini",
         messages=[
@@ -63,6 +65,9 @@ def generate_reply(
 
             Assigned team:
             {assigned_team}
+
+            Company knowledge
+            {knowledge}
             """
             }
         ],
