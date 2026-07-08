@@ -16,3 +16,13 @@ class TriageResult(BaseModel):
 
 class TicketResponse(BaseModel):
     result: TriageResult
+
+class TicketClassification(BaseModel):
+    category: str
+    priority: str
+    risk: str
+
+
+class ReplyResult(BaseModel):
+    customer_reply: str
+    internal_note: str
